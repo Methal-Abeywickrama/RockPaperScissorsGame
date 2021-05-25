@@ -35,16 +35,19 @@
             }
 
             function theThrow() {
-                if (playerPlays() == 1 && computerPlays() == 1 || playerPlays() == 2 && computerPlays() == 2 || playerPlays() == 3 && computerPlays() == 3) {
+                if (playerTurn == 1 && computerTurn == 1 || playerTurn == 2 && computerTurn == 2 || playerTurn == 3 && computerTurn == 3) {
                     var verdict = 0;
-                } else if (playerPlays() == 1 && computerPlays() == 3 || playerPlays() == 2 && computerPlays() == 1 || playerPlays() == 3 && computerPlays() == 2) {
+                } else if (playerTurn == 1 && computerTurn == 3 || playerTurn == 2 && computerTurn == 1 || playerTurn == 3 && computerTurn == 2) {
                     var verdict = 1;
-                } else if (playerPlays() == 1 && computerPlays() == 2 || playerPlays() == 2 && computerPlays() == 3 || playerPlays() == 3 && computerPlays() == 1) {
+                } else if (playerTurn == 1 && computerTurn == 2 || playerTurn == 2 && computerTurn == 3 || playerTurn == 3 && computerTurn == 1) {
                     var verdict = -1;
                 }
                 return verdict;
             }
-            console.log(theThrow());
+            let computerTurn = computerPlays();
+            console.log(computerTurn);
+            let playerTurn = playerPlays();
+            console.log(playerTurn);
         </script>
     </body>
 </html>
