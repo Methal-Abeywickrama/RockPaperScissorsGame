@@ -6,8 +6,15 @@
     <body>
         <script>
             function computerPlays() {
-                let ComputerGuessNumber = Math.floor(Math.random() * (3)) + 1;
-                return ComputerGuessNumber;
+                var ComputerGuessNumber = Math.floor(Math.random() * (3)) + 1;
+                if (ComputerGuessNumber == 1) {
+                    var computerGuess = 1;
+                } else if (ComputerGuessNumber == 2) {
+                    var computerGuess = 2;
+                } else if (ComputerGuessNumber == 3) {
+                    var computerGuess = 3;
+                }
+                return computerGuess;
             }
 
             function caseCorrectInput (myString) {
@@ -15,7 +22,7 @@
             }
 
             function playerPlays() {
-                let playerGuessString = window.prompt("Please enter either rock paper or scissor");
+                let playerGuessString = prompt("Please enter either rock paper or scissor");
                 let correctedInput = caseCorrectInput(playerGuessString);
                 if (correctedInput == "Rock") {
                     var playerGuessNumber = 1;
@@ -27,8 +34,17 @@
                 return playerGuessNumber;
             }
 
-            let testGuess = playerPlays();
-            console.log(testGuess);
+            function theThrow() {
+                if (playerPlays() == 1 && computerPlays() == 1 || playerPlays() == 2 && computerPlays() == 2 || playerPlays() == 3 && computerPlays() == 3) {
+                    var verdict = 0;
+                } else if (playerPlays() == 1 && computerPlays() == 3 || playerPlays() == 2 && computerPlays() == 1 || playerPlays() == 3 && computerPlays() == 2) {
+                    var verdict = 1;
+                } else if (playerPlays() == 1 && computerPlays() == 2 || playerPlays() == 2 && computerPlays() == 3 || playerPlays() == 3 && computerPlays() == 1) {
+                    var verdict = -1;
+                }
+                return verdict;
+            }
+            console.log(theThrow());
         </script>
     </body>
 </html>
