@@ -8,12 +8,13 @@
             function computerPlays() {
                 var ComputerGuessNumber = Math.floor(Math.random() * (3)) + 1;
                 if (ComputerGuessNumber == 1) {
-                    var computerGuess = 1;
+                    computerGuess = 1;
                 } else if (ComputerGuessNumber == 2) {
-                    var computerGuess = 2;
+                    computerGuess = 2;
                 } else if (ComputerGuessNumber == 3) {
-                    var computerGuess = 3;
+                    computerGuess = 3;
                 }
+                console.log(computerGuess);
                 return computerGuess;
             }
 
@@ -25,31 +26,56 @@
                 let playerGuessString = prompt("Please enter either rock paper or scissor");
                 let correctedInput = caseCorrectInput(playerGuessString);
                 if (correctedInput == "Rock") {
-                    var playerGuessNumber = 1;
+                    playerGuessNumber = 1;
                 } else if (correctedInput == "Paper") {
-                    var playerGuessNumber = 2;
+                    playerGuessNumber = 2;
                 } else if (correctedInput == "Scissor") {
-                    var playerGuessNumber = 3;
+                    playerGuessNumber = 3;
                 }
                 return playerGuessNumber;
             }
 
-            function theThrow() {
-                if (playerTurn == 1 && computerTurn == 1 || playerTurn == 2 && computerTurn == 2 || playerTurn == 3 && computerTurn == 3) {
-                    var verdict = 0;
-                } else if (playerTurn == 1 && computerTurn == 3 || playerTurn == 2 && computerTurn == 1 || playerTurn == 3 && computerTurn == 2) {
-                    var verdict = 1;
-                } else if (playerTurn == 1 && computerTurn == 2 || playerTurn == 2 && computerTurn == 3 || playerTurn == 3 && computerTurn == 1) {
-                    var verdict = -1;
+            function theThrow(p1, c1) {
+
+                if (p1 == 1 && c1 == 1 || p1 == 2 && c1 == 2 || p1 == 3 && c1 == 3) {
+                    return "draw";
+                } else if (p1 == 1 && c1 == 3 || p1 == 2 && c1 == 1 || p1 == 3 && c1 == 2) {
+                    return "win";
+                } else if (p1 == 1 && c1 == 2 || p1 == 2 && c1 == 3 || p1 == 3 && c1 == 1) {
+                    return "lose";
                 }
-                return verdict;
             }
-            let computerTurn = computerPlays();
-            console.log(computerTurn);
-            let playerTurn = playerPlays();
-            console.log(playerTurn);
-            let roundResult = theThrow();
-            console.log(roundResult);
+
+            function ThrowDecoder(theInput) {
+                if (theInput == 1) {
+                    return "Rock";
+                } else if (theInput == 2) {
+                    return "Paper";
+                } else {
+                    return "Scissor";
+                }
+            }
+
+            function game() {
+               // Initiallizations
+               var ComputerGuessNumber;
+               var computerGuess;
+               var playerGuessNumber;
+
+                // Execution
+
+               let playersThrow = playerPlays();
+               let decodedPlayer = ThrowDecoder(playersThrow);
+
+               let computersThrow = computerPlays();
+               let decodedComputer = ThrowDecoder(computersThrow);
+               
+               let roundResult = theThrow(playersThrow, computersThrow);
+               console.log(roundResult);
+
+            }
+
+            game();
         </script>
     </body>
 </html>
