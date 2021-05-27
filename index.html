@@ -14,7 +14,6 @@
                 } else if (ComputerGuessNumber == 3) {
                     computerGuess = 3;
                 }
-                console.log(computerGuess);
                 return computerGuess;
             }
 
@@ -38,11 +37,11 @@
             function theThrow(p1, c1) {
 
                 if (p1 == 1 && c1 == 1 || p1 == 2 && c1 == 2 || p1 == 3 && c1 == 3) {
-                    return "draw";
+                    return "It's a draw";
                 } else if (p1 == 1 && c1 == 3 || p1 == 2 && c1 == 1 || p1 == 3 && c1 == 2) {
-                    return "win";
+                    return "You win";
                 } else if (p1 == 1 && c1 == 2 || p1 == 2 && c1 == 3 || p1 == 3 && c1 == 1) {
-                    return "lose";
+                    return "You lose";
                 }
             }
 
@@ -56,26 +55,61 @@
                 }
             }
 
+            function resultCoder(theInput) {
+                if (theInput === "It's a draw") {
+                    return 0;
+                } else if (theInput === "You win") {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+
             function game() {
                // Initiallizations
                var ComputerGuessNumber;
                var computerGuess;
                var playerGuessNumber;
+               var score = 0;
 
                 // Execution
-
+               for (let i = 1; i <= 5; i++) {
+               console.log("Round" + i);
+               console.log(" ");
                let playersThrow = playerPlays();
                let decodedPlayer = ThrowDecoder(playersThrow);
 
                let computersThrow = computerPlays();
                let decodedComputer = ThrowDecoder(computersThrow);
-               
+
+               console.log("The Computer throws...    " +  decodedComputer);
+               console.log("The Player throws...    " +  decodedPlayer);
+               console.log(" ");
                let roundResult = theThrow(playersThrow, computersThrow);
                console.log(roundResult);
+               console.log(" ");
+                
+
+               //result addition
+
+               score = score + resultCoder(roundResult);
+               }
+               
+               return score;
 
             }
 
-            game();
+            function winnerDecider(result) {
+                if (result > 0) {
+                    return "Hey you win the game, dirty cheater !!";
+                } else if (result < 0) {
+                    return "Haha, you lose, stinkface !!";
+                } else {
+                    return "Its a draw, neck and neck !!";
+                }  
+            }
+
+            console.log(winnerDecider(game()));
         </script>
     </body>
 </html>
