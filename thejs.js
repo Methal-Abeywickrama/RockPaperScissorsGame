@@ -5,6 +5,11 @@ const playScissor = document.querySelector("#scissors");
 const computerInput = document.querySelector("#computerInput");
 const yourInput = document.querySelector("#yourInput");
 const resulter = document.querySelector("#resulter");
+const theRound = document.querySelector("#theRounds");
+const button = document.querySelector(".inputButton")
+const replay = document.querySelector("#replay");
+const finalResult = document.querySelector("#finalResult");
+
 
 function computerPlays() {
     var ComputerGuessNumber = Math.floor(Math.random() * (3)) + 1;
@@ -22,15 +27,15 @@ function caseCorrectInput (myString) {
     return myString[0].toUpperCase() + myString.substring(1).toLowerCase();
 }
 
-function playerPlays(yo) {
+function playerPlays(damn) {
     let playerGuessNumber;
-    let playerGuessString = yo;
-    let correctedInput = caseCorrectInput(playerGuessString);
-    if (correctedInput == "Rock") {
+    let playerGuessString = damn;
+    //let correctedInput = caseCorrectInput(playerGuessString);
+    if (playerGuessString == "Rock") {
         playerGuessNumber = 1;
-    } else if (correctedInput == "Paper") {
+    } else if (playerGuessString == "Paper") {
         playerGuessNumber = 2;
-    } else if (correctedInput == "Scissor") {
+    } else if (playerGuessString == "Scissor") {
         playerGuessNumber = 3;
     }
     return playerGuessNumber;
@@ -39,11 +44,11 @@ function playerPlays(yo) {
 function theThrow(p1, c1) {
 
     if (p1 == 1 && c1 == 1 || p1 == 2 && c1 == 2 || p1 == 3 && c1 == 3) {
-        return "It's a draw";
+        return "This round is a draw";
     } else if (p1 == 1 && c1 == 3 || p1 == 2 && c1 == 1 || p1 == 3 && c1 == 2) {
-        return "You win";
+        return "You win this round";
     } else if (p1 == 1 && c1 == 2 || p1 == 2 && c1 == 3 || p1 == 3 && c1 == 1) {
-        return "You lose";
+        return "You lose this round";
     }
 }
 
@@ -58,29 +63,32 @@ function ThrowDecoder(theInput) {
 }
 
 function resultCoder(theInput) {
-    if (theInput === "It's a draw") {
+    if (theInput === "This round is a draw") {
         return 0;
-    } else if (theInput === "You win") {
+    } else if (theInput === "You win this round") {
         return 1;
     } else {
         return -1;
     }
 }
+var score = 0;
+var round = 1;
+theRound.textContent = "Round  " + round;
+finalResult.textContent = "5 rounds to go!"
 
-function game(yo) {
+function game(hello) {
    // Initiallizations
    var ComputerGuessNumber;
    var computerGuess;
-   var score = 0;
 
     // Execution
-
-
+    theRound.textContent = "Round  " + round;
+    round++;
 
    //for (let i = 1; i <= 5; i++) {
-   //console.log("Round" + i);
-   console.log(" ");
-   let playersThrow = playerPlays(yo);
+   //theRound.textContent = "Round" + i;
+   //console.log(" ");
+   let playersThrow = playerPlays(hello);
    let decodedPlayer = ThrowDecoder(playersThrow);
 
    let computersThrow = computerPlays();
@@ -96,8 +104,8 @@ function game(yo) {
 
    console.log(" ");
    let roundResult = theThrow(playersThrow, computersThrow);
-   //console.log(roundResult);
-
+   console.log(roundResult);
+   console.log("reaced");
    resulter.textContent = roundResult;
 
    console.log(" ");
@@ -107,37 +115,46 @@ function game(yo) {
 
    score = score + resultCoder(roundResult);
    //}
-   
-   return score;
+   console.log(score);
+   let toGo = 6 - round;
+   finalResult.textContent = toGo + " rounds to go!";
+   if (round < 6) return;
 
+   playPaper.disabled = true;
+   playRock.disabled = true;
+   playScissor.disabled = true;
+
+   finalResult.textContent = winnerDecider(score);
 }
 
-//function winnerDecider(result) {
-//    if (result > 0) {
-//        return "Hey you win the game, dirty cheater !!";
-//    } else if (result < 0) {
-//        return "Haha, you lose, stinkface !!";
-//    } else {
-//       return "Its a draw, neck and neck !!";
-//    }  
-//}
+function winnerDecider(result) {
+    if (result > 0) {
+        return "Hey you win the game, dirty cheater !!";
+    } else if (result < 0) {
+        return "Haha, you lose, stinkface !!";
+    } else {
+       return "Its a draw, neck and neck !!";
+    }  
+}
 
 //console.log(winnerDecider(game()));
 
 
 
-
-
 playPaper.addEventListener('click', function () {
-    game("paper");
+    game("Paper");
 });
 
 playRock.addEventListener('click', function () {
-    game("rock");
+    game("Rock");
 }); 
 
 playScissor.addEventListener('click', function () {
-    game("scissor");
+    game("Scissor");
+});
+
+replay.addEventListener('click', function () {
+    location.reload();
 });
 
 
