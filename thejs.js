@@ -100,7 +100,7 @@ function game(hello) {
 
    console.log("The Player throws...    " +  decodedPlayer);
 
-   yourInput.textContent = "The player throws ...   " +  decodedPlayer;
+   yourInput.textContent = "The player throws ...   " + decodedPlayer;
 
    console.log(" ");
    let roundResult = theThrow(playersThrow, computersThrow);
@@ -131,7 +131,7 @@ function winnerDecider(result) {
     if (result > 0) {
         return "Hey you win the game, dirty cheater !!";
     } else if (result < 0) {
-        return "Haha, you lose, stinkface !!";
+        return "Haha, you lose the game, stinkface !!";
     } else {
        return "Its a draw, neck and neck !!";
     }  
